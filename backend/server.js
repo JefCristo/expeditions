@@ -1,10 +1,9 @@
-// In your Express.js server's app.js or server.js file
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
 const app = express();
-const port = 5000;
+const port = process.env.PORT || 5000;
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -16,6 +15,26 @@ app.post('/submit-form', (req, res) => {
   console.log('Received form data:', formData);
   res.json({ message: 'Form data received successfully' });
 });
+
+// Define a route to capture and display console logs
+app.get('/logs', (req, res) => {
+  const logs = captureConsoleOutput();
+  res.send(logs);
+});
+
+// Function to capture console output
+function captureConsoleOutput() {
+  const logs = []; // Store console output
+  const originalConsoleLog = console.log;
+
+  // Override console.log to capture logs
+  console.log = function (message) {
+    logs.push(message);
+    originalConsoleLog.apply(console, arguments);
+  };
+
+  return logs.join('\n');
+}
 
 // Start the server
 app.listen(port, () => {
