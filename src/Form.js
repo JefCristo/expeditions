@@ -39,6 +39,7 @@ function Form({ handleRadioChange, selectedTravelPeriod }) {
     low: null,
     mid: null,
     high: null,
+    email: '',
   });
 
   const handleSubmit = async (event) => {
@@ -180,9 +181,13 @@ function Form({ handleRadioChange, selectedTravelPeriod }) {
               /> High
             </label>
           </div>
+          
         </div>
+          <div style={containerBelowStyle}>
+            Your E-mail: <input type='email' name='email' value={formData.email} onChange={(e)=> setFormData({...formData,email: e.target.value})}/>
+          </div>
       </div>
-      <div style={containerBelowStyle}>
+      <div style={containerBelowStyle} >
         <button type='submit'>Submit</button>
       </div>
       {isSubmitted && (
