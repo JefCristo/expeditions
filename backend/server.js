@@ -21,7 +21,7 @@ app.post('/submit-form', (req, res) => {
   const { email, depart, city, destination, date, day, solo, group, travellers, low, mid, high, travelPeriod } = req.body;
 
   const mailOptions = {
-    from: 'your-email@gmail.com',
+    from: 'jeffy53339@gmail.com',
     to: email,
     subject: 'Form Submission Confirmation',
     text: `Hello,
