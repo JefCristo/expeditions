@@ -190,7 +190,7 @@ function Form({ handleRadioChange, selectedTravelPeriod }) {
           
         </div>
           <div style={containerBelowStyle}>
-            Your E-mail: <input type='email' name='email' value={formData.email} onChange={(e)=> setFormData({...formData,email: e.target.value})}/>
+            Your E-mai: <input type='email' name='email' value={formData.email} onChange={(e)=> setFormData({...formData,email: e.target.value})}/>
           </div>
       </div>
       <div style={containerBelowStyle} >
