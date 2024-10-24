@@ -45,13 +45,19 @@ function Form({ handleRadioChange, selectedTravelPeriod }) {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    // Add selectedTravelPeriod to formData before sending
+    const fullFormData = {
+      ...formData,
+      travelPeriod: selectedTravelPeriod
+    };
+
     try {
       const response = await fetch('http://localhost:5000/submit-form', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(fullFormData),
       });
 
       if (response.ok) {

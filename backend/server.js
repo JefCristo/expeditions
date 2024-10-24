@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const nodemailer = require('nodemailer');
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -8,35 +9,48 @@ const port = process.env.PORT || 5000;
 app.use(bodyParser.json());
 app.use(cors());
 
-// Define a route to handle form submissions
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'your-email@gmail.com', // Your email
+    pass: 'your-email-password',  // Your email password
+  }
+});
+
 app.post('/submit-form', (req, res) => {
-  const formData = req.body; // Access the submitted data
-  // Process and save the data as needed
-  console.log('Received form data:', formData);
-  res.json({ message: 'Form data received successfully' });
-});
+  const { email, depart, city, destination, date, day, solo, group, travellers, low, mid, high, travelPeriod } = req.body;
 
-// Define a route to capture and display console logs
-app.get('/logs', (req, res) => {
-  const logs = captureConsoleOutput();
-  res.send(logs);
-});
+  const mailOptions = {
+    from: 'your-email@gmail.com',
+    to: email,
+    subject: 'Form Submission Confirmation',
+    text: `Hello,
 
-// Function to capture console output
-function captureConsoleOutput() {
-  const logs = []; // Store console output
-  const originalConsoleLog = console.log;
+Thank you for submitting your form! Here's a summary of your submission:
 
-  // Override console.log to capture logs
-  console.log = function (message) {
-    logs.push(message);
-    originalConsoleLog.apply(console, arguments);
+- Departing country: ${depart}
+- City: ${city}
+- Preferred destination: ${destination}
+- Travel period: ${travelPeriod === 'Anytime' ? 'Anytime (adjusted to cheaper cost)' : `Specific Dates: ${date || 'Not specified'}`}
+- Number of days: ${day || 'Not specified'}
+- Travel type: ${solo ? 'Solo' : group ? 'Group' : 'Not specified'}
+${group ? `- Number of travellers: ${travellers || 'Not specified'}` : ''}
+- Budget preference: ${low ? 'Low' : mid ? 'Mid-range' : high ? 'High' : 'Not specified'}
+
+We will get back to you shortly.
+`
   };
 
-  return logs.join('\n');
-}
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.error('Error sending email:', error);
+      return res.status(500).send('Error sending email');
+    }
+    console.log('Email sent:', info.response);
+    res.status(200).send('Form data received and email sent successfully');
+  });
+});
 
-// Start the server
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
