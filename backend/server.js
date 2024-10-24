@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -12,8 +14,8 @@ app.use(cors());
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: 'jeffy53339@gmail.com', // Your email
-    pass: 'zjis ftdh rzxm fqwo',  // Your email password
+    user: process.env.EMAIL_USER, // Your email
+    pass: process.env.EMAIL_PASS,  // Your email password
   }
 });
 
@@ -21,8 +23,8 @@ app.post('/submit-form', (req, res) => {
   const { email, depart, city, destination, date, day, solo, group, travellers, low, mid, high, travelPeriod } = req.body;
 
   const mailOptions = {
-    from: 'jeffy53339@gmail.com',
-    to: email,
+    from: email,
+    to: process.env.EMAIL_USER,
     subject: 'Form Submission Confirmation',
     text: `Hello,
 
@@ -36,7 +38,7 @@ Thank you for submitting your form! Here's a summary of your submission:
 - Travel type: ${solo ? 'Solo' : group ? 'Group' : 'Not specified'}
 ${group ? `- Number of travellers: ${travellers || 'Not specified'}` : ''}
 - Budget preference: ${low ? 'Low' : mid ? 'Mid-range' : high ? 'High' : 'Not specified'}
-
+-Inquirer's E-Mail: ${email}
 We will get back to you shortly.
 `
   };
