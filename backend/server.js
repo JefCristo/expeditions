@@ -1,9 +1,9 @@
 require('dotenv').config();
 
-import express from 'express';
-import { json } from 'body-parser';
-import cors from 'cors';
-import { createTransport } from 'nodemailer';
+const express = require('express');
+const { json } = require('body-parser');
+const cors = require('cors');
+const nodemailer = require('nodemailer');
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -11,12 +11,12 @@ const port = process.env.PORT || 5000;
 app.use(json());
 app.use(cors());
 
-const transporter = createTransport({
+const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
     user: process.env.EMAIL_USER, // Your email
-    pass: process.env.EMAIL_PASS,  // Your email password
-  }
+    pass: process.env.EMAIL_PASS, // Your email password
+  },
 });
 
 app.post('/submit-form', (req, res) => {
@@ -39,8 +39,9 @@ Thank you for submitting your form! Here's a summary of your submission:
 ${group ? `- Number of travellers: ${travellers || 'Not specified'}` : ''}
 - Budget preference: ${low ? 'Low' : mid ? 'Mid-range' : high ? 'High' : 'Not specified'}
 - Inquirer's E-Mail: ${email}
+
 We will get back to you shortly.
-`
+    `,
   };
 
   transporter.sendMail(mailOptions, (error, info) => {
