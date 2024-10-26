@@ -38,7 +38,7 @@ Thank you for submitting your form! Here's a summary of your submission:
 - Travel type: ${solo ? 'Solo' : group ? 'Group' : 'Not specified'}
 ${group ? `- Number of travellers: ${travellers || 'Not specified'}` : ''}
 - Budget preference: ${low ? 'Low' : mid ? 'Mid-range' : high ? 'High' : 'Not specified'}
--Inquirer's E-Mail: ${email}
+- Inquirer's E-Mail: ${email}
 We will get back to you shortly.
 `
   };
