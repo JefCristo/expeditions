@@ -5,6 +5,8 @@ const { json } = require('body-parser');
 const cors = require('cors');
 const nodemailer = require('nodemailer');
 
+console.log(process.env.EMAIL_USER, process.env.EMAIL_PASS);
+
 const app = express();
 const port = process.env.PORT || 5000;
 
