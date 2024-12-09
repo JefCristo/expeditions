@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Button from './Button';
 
 function Form({ handleRadioChange, selectedTravelPeriod }) {
   const containerBelowStyle = {
@@ -194,7 +195,7 @@ function Form({ handleRadioChange, selectedTravelPeriod }) {
           </div>
       </div>
       <div style={containerBelowStyle} >
-        <button type='submit'>Submit</button>
+        <Button type='submit'>Submit</Button>
       </div>
       {isSubmitted && (
         <div style={successMessageStyle}>
