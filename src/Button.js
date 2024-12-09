@@ -29,7 +29,7 @@ const StyledWrapper = styled.div`
     -webkit-appearance: button;
     background-color: #000;
     background-image: none;
-    color: #fff;
+    color: #0f0;
     cursor: pointer;
     font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
       Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif,
@@ -127,7 +127,7 @@ const StyledWrapper = styled.div`
   .btn-17:after,
   .btn-17:before {
     --skew: 0.2;
-    background: #fff;
+    background: #0f0;
     content: "";
     display: block;
     height: 102%;
