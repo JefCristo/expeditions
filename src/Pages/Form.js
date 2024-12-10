@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import Button from '../Components/Button';
 
 function Form({ handleRadioChange, selectedTravelPeriod }) {
@@ -122,7 +123,9 @@ function Form({ handleRadioChange, selectedTravelPeriod }) {
     <div>
       {/* Banner Section */}
       <div style={headerStyle}>
-        JEFCRISTO'S EXPEDITIONS
+      <Link to="/" style={{ color: '#00FF00', textDecoration: 'none' }}>
+          JEFCRISTO'S EXPEDITIONS
+        </Link>
       </div>
 
       {/* Centered Form Container (without overlap) */}
