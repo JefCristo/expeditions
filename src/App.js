@@ -9,10 +9,10 @@ function App() {
   return (
     <Router>
       <Routes>
-        {/* Home Page */}
+        {/* Route for Home Page */}
         <Route path="/" element={<Home />} />
 
-        {/* Form Page */}
+        {/* Route for Form Page */}
         <Route
           path="/form"
           element={

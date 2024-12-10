@@ -2,6 +2,19 @@ import React, { useState } from 'react';
 import Button from '../Components/Button';
 
 function Form({ handleRadioChange, selectedTravelPeriod }) {
+  const headerStyle = {
+    backgroundColor: 'black',
+    color: '#00FF00', // Green text
+    textAlign: 'center',
+    padding: '20px',
+    fontSize: '3rem',
+    fontFamily: 'Luckiest Guy', // Custom font
+    fontWeight: '400',
+    lineHeight: '1.5',
+    wordWrap: 'break-word',
+    marginBottom: '30px', // Space below the header
+  };
+
   const containerStyle = {
     display: 'flex',
     justifyContent: 'center',
@@ -95,6 +108,7 @@ function Form({ handleRadioChange, selectedTravelPeriod }) {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   return (
+    
     <div style={containerStyle}>
       <form onSubmit={handleSubmit} style={formStyle}>
         <div style={containerBelowStyle}>
