@@ -2,31 +2,25 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 function Home() {
-  const containerStyle = {
-    width: '100%',
-    height: '100vh',
-    background: 'black',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: '20px', // Padding for mobile view
-  };
-
-  const textStyle = {
+  // Banner Style (same as in Form.js)
+  const headerStyle = {
+    backgroundColor: 'black',
+    color: '#00FF00', // Green text
     textAlign: 'center',
-    color: '#00FF00',
-    fontSize: '8vw', // Use relative font size for responsiveness
-    fontFamily: 'Luckiest Guy',
+    padding: '40px 20px', // Increased padding for more space between the banner and form
+    fontSize: '3rem',
+    fontFamily: 'Luckiest Guy', // Custom font
     fontWeight: '400',
-    lineHeight: '1.2',
+    lineHeight: '1.5',
     wordWrap: 'break-word',
-    marginBottom: '20px',
+    marginBottom: '20px', // Add spacing below the banner
   };
 
   const buttonStyle = {
-    padding: '15px 25px',
-    fontSize: '18px',
+    display: 'block',
+    margin: '20px auto',
+    padding: '10px 20px',
+    fontSize: '24px',
     backgroundColor: '#00FF00',
     color: 'black',
     border: 'none',
@@ -34,16 +28,23 @@ function Home() {
     cursor: 'pointer',
     textDecoration: 'none',
     textAlign: 'center',
-    maxWidth: '200px',
-    width: '100%', // Full width on smaller screens
   };
 
   return (
-    <div style={containerStyle}>
-      <div style={textStyle}>JEFCRISTO'S EXPEDITIONS</div>
-      <Link to="/form" style={buttonStyle}>
-        Go to Form
-      </Link>
+    <div>
+      {/* Add the Banner Section */}
+      <div style={headerStyle}>
+        <Link to="/" style={{ color: '#00FF00', textDecoration: 'none' }}>
+          JEFCRISTO'S EXPEDITIONS
+        </Link>
+      </div>
+
+      {/* Home Page Content */}
+      <div className="container" style={{ textAlign: 'center', marginTop: '50px' }}>
+        <Link to="/form" style={buttonStyle}>
+          Go to Form
+        </Link>
+      </div>
     </div>
   );
 }
