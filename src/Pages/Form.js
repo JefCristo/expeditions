@@ -2,32 +2,51 @@ import React, { useState } from 'react';
 import Button from '../Components/Button';
 
 function Form({ handleRadioChange, selectedTravelPeriod }) {
-  
+  const containerStyle = {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '100vh',
+    backgroundColor: '#f9f9f9', // Light background for better visibility
+    padding: '20px', // Padding for mobile view
+  };
+
+  const formStyle = {
+    width: '100%',
+    maxWidth: '500px', // Limit form width for mobile view
+    padding: '20px',
+    backgroundColor: '#fff',
+    borderRadius: '10px',
+    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+    boxSizing: 'border-box', // Include padding in the width
+  };
 
   const containerBelowStyle = {
     marginTop: '20px',
     textAlign: 'left',
     color: 'black',
-    fontSize: '32px',
-    fontFamily: 'Hammersmith One , fantasy',
+    fontSize: '18px', // Smaller font size for mobile
+    fontFamily: 'Hammersmith One, fantasy',
     fontWeight: 400,
-    lineHeight: '30px',
+    lineHeight: '1.5',
     wordWrap: 'break-word',
   };
 
   const inputStyle = {
-    minWidth: '510px',
-    fontSize: '30px',
+    width: '100%', // Full width for input fields
+    fontSize: '16px', // Smaller font for mobile
+    padding: '10px',
+    marginBottom: '10px',
   };
 
   const radioStyle = {
-    marginLeft: '400px',
-    marginTop: '-30px',
+    marginTop: '10px',
   };
 
   const successMessageStyle = {
     color: 'green',
     marginTop: '10px',
+    textAlign: 'center',
   };
 
   const [formData, setFormData] = useState({
@@ -48,10 +67,9 @@ function Form({ handleRadioChange, selectedTravelPeriod }) {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // Add selectedTravelPeriod to formData before sending
     const fullFormData = {
       ...formData,
-      travelPeriod: selectedTravelPeriod
+      travelPeriod: selectedTravelPeriod,
     };
 
     try {
@@ -65,7 +83,7 @@ function Form({ handleRadioChange, selectedTravelPeriod }) {
 
       if (response.ok) {
         console.log('Form data submitted successfully');
-        setIsSubmitted(true); // Set isSubmitted to true upon successful submission
+        setIsSubmitted(true);
       } else {
         console.error('Form data submission failed');
       }
@@ -77,135 +95,180 @@ function Form({ handleRadioChange, selectedTravelPeriod }) {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   return (
-    <form onSubmit={handleSubmit}>
-      
-      <div style={containerBelowStyle}>
-        Your departing country: <input type='text' name='depart' value={formData.depart} onChange={(e) => setFormData({ ...formData, depart: e.target.value })} />
-      </div>
-      <div style={containerBelowStyle}>
-        City/town you live: <input type='text' name='city' value={formData.city} onChange={(e) => setFormData({ ...formData, city: e.target.value })} />
-      </div>
-      <div style={containerBelowStyle}>
-        Your preferred destination: <input type='text' style={inputStyle} name='destination' placeholder='If you have no idea type Anywhere' value={formData.destination} onChange={(e) => setFormData({ ...formData, destination: e.target.value })} />
-      </div>
-      <div style={containerBelowStyle}>
-        Preferred period to travel:
-        <div style={radioStyle}>
-          <div>
+    <div style={containerStyle}>
+      <form onSubmit={handleSubmit} style={formStyle}>
+        <div style={containerBelowStyle}>
+          Your departing country:
+          <input
+            type="text"
+            name="depart"
+            value={formData.depart}
+            onChange={(e) => setFormData({ ...formData, depart: e.target.value })}
+            style={inputStyle}
+          />
+        </div>
+        <div style={containerBelowStyle}>
+          City/town you live:
+          <input
+            type="text"
+            name="city"
+            value={formData.city}
+            onChange={(e) => setFormData({ ...formData, city: e.target.value })}
+            style={inputStyle}
+          />
+        </div>
+        <div style={containerBelowStyle}>
+          Your preferred destination:
+          <input
+            type="text"
+            style={inputStyle}
+            name="destination"
+            placeholder="If you have no idea type Anywhere"
+            value={formData.destination}
+            onChange={(e) => setFormData({ ...formData, destination: e.target.value })}
+          />
+        </div>
+        <div style={containerBelowStyle}>
+          Preferred period to travel:
+          <div style={radioStyle}>
             <label>
               <input
-                type='radio'
-                name='travelPeriod'
-                value='Anytime'
+                type="radio"
+                name="travelPeriod"
+                value="Anytime"
                 checked={selectedTravelPeriod === 'Anytime'}
                 onChange={() => handleRadioChange('Anytime')}
-              /> Anytime (adjusted to cheaper cost)
+              />
+              Anytime (adjusted to cheaper cost)
             </label>
-          </div>
-          <div>
+            <br />
             <label>
               <input
-                type='radio'
-                name='travelPeriod'
-                value='Specific Dates'
+                type="radio"
+                name="travelPeriod"
+                value="Specific Dates"
                 checked={selectedTravelPeriod === 'Specific Dates'}
                 onChange={() => handleRadioChange('Specific Dates')}
-              /> Specific Dates
+              />
+              Specific Dates
             </label>
           </div>
         </div>
-      </div>
-      {selectedTravelPeriod === 'Specific Dates' && (
+        {selectedTravelPeriod === 'Specific Dates' && (
+          <div style={containerBelowStyle}>
+            Select a date:
+            <input
+              type="date"
+              name="date"
+              value={formData.date}
+              onChange={(e) => setFormData({ ...formData, date: e.target.value })}
+              style={inputStyle}
+            />
+          </div>
+        )}
         <div style={containerBelowStyle}>
-          Select a date: <input type='date' name='date' value={formData.date} onChange={(e) => setFormData({ ...formData, date: e.target.value })} />
+          Number of days (optional):
+          <input
+            type="text"
+            name="day"
+            value={formData.day}
+            onChange={(e) => setFormData({ ...formData, day: e.target.value })}
+            style={inputStyle}
+          />
         </div>
-      )}
-      <div style={containerBelowStyle}>
-        Number of days (optional): <input type='text' name='day' value={formData.day} onChange={(e) => setFormData({ ...formData, day: e.target.value })} />
-      </div>
-      <div style={containerBelowStyle}>
-        Travel type:
-        <div style={radioStyle}>
-          <div>
+        <div style={containerBelowStyle}>
+          Travel type:
+          <div style={radioStyle}>
             <label>
               <input
-                type='radio'
-                name='solo'
-                value='solo'
+                type="radio"
+                name="solo"
+                value="solo"
                 checked={formData.solo === 'solo'}
                 onChange={() => setFormData({ ...formData, solo: 'solo', group: null })}
-              /> Solo Travel
+              />
+              Solo Travel
             </label>
-          </div>
-          <div>
+            <br />
             <label>
               <input
-                type='radio'
-                name='group'
-                value='group'
+                type="radio"
+                name="group"
+                value="group"
                 checked={formData.group === 'group'}
                 onChange={() => setFormData({ ...formData, solo: null, group: 'group' })}
-              /> Group Travel
+              />
+              Group Travel
             </label>
           </div>
         </div>
-      </div>
-      {formData.group === 'group' && (
+        {formData.group === 'group' && (
+          <div style={containerBelowStyle}>
+            Number of Travellers:
+            <input
+              type="text"
+              name="travellers"
+              value={formData.travellers}
+              onChange={(e) => setFormData({ ...formData, travellers: e.target.value })}
+              style={inputStyle}
+            />
+          </div>
+        )}
         <div style={containerBelowStyle}>
-          Number of Travellers: <input type='text' name='travellers' value={formData.travellers} onChange={(e) => setFormData({ ...formData, travellers: e.target.value })} />
-        </div>
-      )}
-      <div style={containerBelowStyle}>
-        Budget:
-        <div style={radioStyle}>
-          <div>
+          Budget:
+          <div style={radioStyle}>
             <label>
               <input
-                type='radio'
-                name='low'
-                value='low'
+                type="radio"
+                name="low"
+                value="low"
                 checked={formData.low === 'low'}
                 onChange={() => setFormData({ ...formData, low: 'low', mid: null, high: null })}
-              /> Low
+              />
+              Low
             </label>
-          </div>
-          <div>
+            <br />
             <label>
               <input
-                type='radio'
-                name='mid'
-                value='mid'
+                type="radio"
+                name="mid"
+                value="mid"
                 checked={formData.mid === 'mid'}
                 onChange={() => setFormData({ ...formData, low: null, mid: 'mid', high: null })}
-              /> Mid-Range
+              />
+              Mid-Range
             </label>
-          </div>
-          <div>
+            <br />
             <label>
               <input
-                type='radio'
-                name='high'
-                value='high'
+                type="radio"
+                name="high"
+                value="high"
                 checked={formData.high === 'high'}
                 onChange={() => setFormData({ ...formData, low: null, mid: null, high: 'high' })}
-              /> High
+              />
+              High
             </label>
           </div>
-          
         </div>
-          <div style={containerBelowStyle}>
-            Your E-mai: <input type='email' name='email' value={formData.email} onChange={(e)=> setFormData({...formData,email: e.target.value})}/>
-          </div>
-      </div>
-      <div style={containerBelowStyle} >
-        <Button type='submit'>Submit</Button>
-      </div>
-      {isSubmitted && (
-        <div style={successMessageStyle}>
-          Form submitted successfully!
+        <div style={containerBelowStyle}>
+          Your Email:
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+            style={inputStyle}
+          />
         </div>
-      )}
-    </form>
+        <div style={{ textAlign: 'center', marginTop: '20px' }}>
+          <Button type="submit">Submit</Button>
+        </div>
+        {isSubmitted && (
+          <div style={successMessageStyle}>Form submitted successfully!</div>
+        )}
+      </form>
+    </div>
   );
 }
 
