@@ -1,41 +1,29 @@
 import React, { useState } from 'react';
-import Form from './Pages/Form';
-import Home from './Pages/Home'; 
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './Pages/Home'; // Import Home.js
+import Form from './Pages/Form'; // Import Form.js
 
 function App() {
-  const containerStyle = {
-    width: '100%',
-    height: 'auto',
-    background: 'black',
-  };
-
-  const textStyle = {
-    textAlign: 'center',
-    color: '#00FF00',
-    fontSize: 96,
-    fontFamily: 'Luckiest Guy',
-    fontWeight: '400',
-    lineHeight: '1.5',
-    wordWrap: 'break-word',
-  };
-
-
   const [selectedTravelPeriod, setSelectedTravelPeriod] = useState(null);
 
   return (
-    <div>
-      <div style={containerStyle}>
-        <div style={textStyle}>
-          JEFCRISTO'S EXPEDITIONS
-        </div>
-      </div>
-      <div className='container'>
-        <Form
-          selectedTravelPeriod={selectedTravelPeriod}
-          handleRadioChange={(value) => setSelectedTravelPeriod(value)}
+    <Router>
+      <Routes>
+        {/* Home Page */}
+        <Route path="/" element={<Home />} />
+
+        {/* Form Page */}
+        <Route
+          path="/form"
+          element={
+            <Form
+              selectedTravelPeriod={selectedTravelPeriod}
+              handleRadioChange={(value) => setSelectedTravelPeriod(value)}
+            />
+          }
         />
-      </div>
-    </div>
+      </Routes>
+    </Router>
   );
 }
 
