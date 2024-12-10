@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import Form from './Form'; 
+import Form from './Pages/Form';
+import Home from './Pages/Home'; 
 
 function App() {
   const containerStyle = {

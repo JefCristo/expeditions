@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
-import Button from './Button';
+
+import Button from '../Components/Button';
 
 function Form({ handleRadioChange, selectedTravelPeriod }) {
+  
+
   const containerBelowStyle = {
     marginTop: '20px',
     textAlign: 'left',
@@ -76,6 +79,7 @@ function Form({ handleRadioChange, selectedTravelPeriod }) {
 
   return (
     <form onSubmit={handleSubmit}>
+      
       <div style={containerBelowStyle}>
         Your departing country: <input type='text' name='depart' value={formData.depart} onChange={(e) => setFormData({ ...formData, depart: e.target.value })} />
       </div>
