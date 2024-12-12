@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './Pages/Home'; // Import Home.js
 import Form from './Pages/Form'; // Import Form.js
+import ItineraryDetail from './Pages/ItineraryDetails'; // Import ItineraryDetail.js
 
 function App() {
   const [selectedTravelPeriod, setSelectedTravelPeriod] = useState(null);
@@ -22,6 +23,9 @@ function App() {
             />
           }
         />
+
+        {/* Route for Itinerary Detail Page */}
+        <Route path="/itinerary/:id" element={<ItineraryDetail />} />
       </Routes>
     </Router>
   );
