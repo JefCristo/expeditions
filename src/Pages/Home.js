@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import Button2 from '../Components/Button2'; // Import the custom button
 
 function Home() {
   const [hoveredCategory, setHoveredCategory] = useState(null);
+  const [hoveredItem, setHoveredItem] = useState(null); // To keep track of hovered item
 
   const headerStyle = {
     backgroundColor: 'black',
@@ -40,7 +42,7 @@ function Home() {
     textAlign: 'left',
     cursor: 'pointer',
     position: 'relative',
-    transition: 'background-color 0.3s ease', // Smooth transition for background color
+    transition: 'background-color 0.3s ease',
   };
 
   const dropdownStyle = {
@@ -54,8 +56,8 @@ function Home() {
     padding: '10px',
     minWidth: '200px',
     opacity: 0,
-    visibility: 'hidden', // Hidden by default
-    transition: 'opacity 0.3s ease, visibility 0.3s ease', // Smooth fade-in/fade-out effect
+    visibility: 'hidden',
+    transition: 'opacity 0.3s ease, visibility 0.3s ease',
   };
 
   const dropdownItemStyle = {
@@ -64,24 +66,21 @@ function Home() {
     color: 'black',
     textDecoration: 'none',
     display: 'block',
+    cursor: 'pointer', // Add cursor pointer for the dropdown items
+    transition: 'background-color 0.3s ease', // Smooth transition for background-color
+  };
+
+  // Highlight style for hovered item
+  const dropdownItemHoverStyle = {
+    ...dropdownItemStyle,
+    backgroundColor: '#f0f0f0', // Change the background color on hover
   };
 
   const buttonContainerStyle = {
     textAlign: 'center',
     marginTop: '30px',
-  };
-
-  const buttonStyle = {
-    display: 'inline-block',
-    padding: '15px 30px',
-    fontSize: '20px',
-    fontWeight: 'bold',
-    color: '#fff',
-    backgroundColor: '#00FF00',
-    border: 'none',
-    borderRadius: '5px',
-    cursor: 'pointer',
-    textDecoration: 'none',
+    display: 'flex',
+    justifyContent: 'center', // Centers the button horizontally
   };
 
   const categories = [
@@ -138,14 +137,16 @@ function Home() {
                   visibility: hoveredCategory === category.id ? 'visible' : 'hidden',
                   opacity: hoveredCategory === category.id ? 1 : 0,
                 }}
-                onMouseEnter={() => setHoveredCategory(category.id)} // Keep dropdown open
-                onMouseLeave={() => setHoveredCategory(null)} // Close dropdown when mouse leaves
+                onMouseEnter={() => setHoveredCategory(category.id)}
+                onMouseLeave={() => setHoveredCategory(null)}
               >
                 {category.itineraries.map((itinerary) => (
                   <Link
                     to={itinerary.link}
                     key={itinerary.id}
-                    style={dropdownItemStyle}
+                    style={hoveredItem === itinerary.id ? dropdownItemHoverStyle : dropdownItemStyle}
+                    onMouseEnter={() => setHoveredItem(itinerary.id)}
+                    onMouseLeave={() => setHoveredItem(null)}
                   >
                     {itinerary.name}
                   </Link>
@@ -155,10 +156,10 @@ function Home() {
           ))}
         </div>
 
-        {/* Form Button at the Bottom */}
+        {/* Centered Form Button */}
         <div style={buttonContainerStyle}>
-          <Link to="/form" style={buttonStyle}>
-            Go to Form
+          <Link to="/form" style={{ textDecoration: 'none' }}>
+            <Button2 />
           </Link>
         </div>
       </div>
