@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Button2 from '../Components/Button2'; // Import the custom button
-
+import Button3 from '../Components/Button3';
 function Home() {
   const [hoveredCategory, setHoveredCategory] = useState(null);
   const [hoveredItem, setHoveredItem] = useState(null); // To keep track of hovered item
@@ -29,6 +29,10 @@ function Home() {
     flexDirection: 'column',
     alignItems: 'flex-start',
     marginTop: '20px',
+  };
+
+  const alignCentre={
+    alignItems:'flex-start',
   };
 
   const categoryStyle = {
@@ -162,6 +166,9 @@ function Home() {
             <Button2 />
           </Link>
         </div>
+        <div style={alignCentre}><Button3/></div>
+          
+
       </div>
     </div>
   );

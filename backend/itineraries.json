@@ -1,0 +1,26 @@
+{
+    "id": "1a",
+    "name": "Mountaineering Adventure",
+    "price": 1200,
+    "priceBreakdown": {
+      "transportation": 500,
+      "accommodation": 400,
+      "meals": 200,
+      "activities": 100,
+      "guide": 100
+    },
+    "inclusions": [
+      "Accommodation",
+      "Meals",
+      "Transport",
+      "Guides",
+      "Equipment"
+    ],
+    "exclusions": [
+      "Personal expenses",
+      "Travel insurance"
+    ],
+    "description": "A thrilling mountaineering adventure across challenging terrains, complete with expert guides, equipment, and accommodation.",
+    "images": ["image1.jpg", "image2.jpg", "image3.jpg"]
+  }
+  
